@@ -15,7 +15,7 @@ class Home extends ConsumerWidget {
       backgroundColor: Colors.black54,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // Center vertically
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GestureDetector(
                 onPanStart: (details) {},
@@ -29,7 +29,7 @@ class Home extends ConsumerWidget {
                       .read(pointerProvider.notifier)
                       .updateLocation(Offset(0, 0));
 
-                  print(ref.read(boardProvider.notifier).checkWord());
+                  print(ref.read(boardProvider));
                 },
                 child: Board()),
             MyButton(),

@@ -6,6 +6,16 @@ class BoardProvider extends Notifier<List<String>> {
     return [];
   }
 
+  static final wordsToFind = [
+    "ANIMAL",
+    "FIRE",
+    "LAKE",
+    "MAP",
+    "MOON",
+    "NATURE",
+    "PARK"
+  ];
+
   String userTypedWord = "";
 
   List<List<String>> foundWords = [];
@@ -18,7 +28,7 @@ class BoardProvider extends Notifier<List<String>> {
   }
 
   bool checkWord() {
-    if (userTypedWord == "BOOK") {
+    if (wordsToFind.contains(userTypedWord)) {
       foundWords.add(state);
       return true;
     }

@@ -2,20 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:word_search/widgets/customBox.dart';
 
 class Board extends StatelessWidget {
-  const Board({super.key});
+  Board({super.key});
+
+  final boardLetters = [
+    ["N", "A", "N", "O", "O", "M"],
+    ["A", "N", "M", "A", "P", "U"],
+    ["T", "I", "K", "R", "A", "P"],
+    ["U", "M", "E", "R", "I", "F"],
+    ["R", "A", "E", "K", "A", "L"],
+    ["E", "L", "E", "U", "I", "U"],
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: List.generate(
-        3,
+        boardLetters.length,
         (row) => Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(
-            5,
+            boardLetters[row].length,
             (col) => Custombox(
-              letter: ["B", "O", "O", "K", "S"][col],
-              keyValue: ('$row-$col'),
+              letter: boardLetters[row][col],
+              keyValue: '$row-$col',
             ),
           ),
         ),

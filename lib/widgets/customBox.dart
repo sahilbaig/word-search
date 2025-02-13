@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:word_search/providers/board_provider.dart';
 import 'package:word_search/providers/pointer_provider.dart';
+import 'package:word_search/widgets/board.dart';
 
 class Custombox extends ConsumerStatefulWidget {
   final String letter;
@@ -33,7 +34,6 @@ class _CustomboxState extends ConsumerState<Custombox> {
         setState(() {
           isHovered = true;
         });
-        // Avoid modifying provider inside build, so schedule the update
         WidgetsBinding.instance.addPostFrameCallback((_) {
           board.addWidgetKey(widget.keyValue, widget.letter);
         });
@@ -45,22 +45,26 @@ class _CustomboxState extends ConsumerState<Custombox> {
   Widget build(BuildContext context) {
     final Offset pointer = ref.watch(pointerProvider);
     final BoardState = ref.watch(boardProvider).contains(widget.keyValue);
+
     checkHover(pointer); // Checking for hover on each frame
-    return Container(
-      height: 50,
-      width: 50,
-      decoration: BoxDecoration(
-        color: BoardState ? Colors.red : Colors.blue,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.black, width: 2),
-      ),
-      child: Center(
-        child: Text(
-          widget.letter,
-          style: const TextStyle(
-            fontSize: 32,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+    return GestureDetector(
+      onPanUpdate: (details) => {print("inside the keys")},
+      child: Container(
+        height: 50,
+        width: 50,
+        decoration: BoxDecoration(
+          color: BoardState ? Colors.red : Colors.blue,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.black, width: 2),
+        ),
+        child: Center(
+          child: Text(
+            widget.letter,
+            style: const TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
           ),
         ),
       ),
